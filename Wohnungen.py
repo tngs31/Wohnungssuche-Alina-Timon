@@ -94,7 +94,15 @@ if not df.empty:
         #size_max=size,
         #zoom=5,
         #height=700,
-        hover_data=hover_data,
+        hover_data={'Link': False,
+                      'Bezugsdatum' : True,
+                      'Bezirk' : True  ,
+                      'Lat': True,
+                      'Lon': True,
+                      'Flaeche' : False,
+                      'Zimmer': False,
+                      'Kosten': True
+                      },
         #hover_name="Kosten"
         )
 
