@@ -67,15 +67,16 @@ with st.sidebar:
 
 
 
+#hover data sind die die angezeigt werden beim darüber fahren mit der maus
 hover_data = {'Link': False,
-            'Bezugsdatum': True, 
-            'Bezirk': True, 
-            'Lat': False,
-            'Lon': False,
-            'Flaeche': True,
-            'Zimmer': False,
-            'Kosten': True
-            }
+              'Bezugsdatum' : True,
+              'Bezirk' : True  ,
+              'Lat': True,
+              'Lon': True,
+              'Flaeche' : False,
+              'Zimmer': False,
+              'Kosten': True
+              }
 
 
 df['size'] = 20
