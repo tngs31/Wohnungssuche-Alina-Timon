@@ -105,7 +105,7 @@ if not df.empty:
         height=700,
         hover_data=hover_data,
         hover_name="Kosten",
-    )
+        )
 
     st.plotly_chart(fig, use_container_width=True)
 
