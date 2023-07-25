@@ -101,10 +101,10 @@ if not df.empty:
         #color_continuous_scale= [[0, '#00441b'], [0.5, '#72c375'], [1, 'white']],
         #size="Flaeche",
         #size_max=size,
-        zoom=5,
-        height=700,
-        hover_data=hover_data,
-        hover_name="Kosten",
+        #zoom=5,
+        #height=700,
+        #hover_data=hover_data,
+        #hover_name="Kosten"
         )
 
     st.plotly_chart(fig, use_container_width=True)
