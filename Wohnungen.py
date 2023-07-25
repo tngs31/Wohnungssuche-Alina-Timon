@@ -62,16 +62,6 @@ with st.sidebar:
 
     st.markdown("Diese Karte zeigt die Lage der Wohnungen in Wien.")
 
-    
-    st.header("Map Adjustments")
-
-    size = st.slider(
-        "Size of the dots", 5, 15, (8), step=1, help="Pick a size"
-    )
-
-    color_custom = st.color_picker(
-        "Color of the dots", '#00441b', help="Pick a color"
-    )
 
 
 
@@ -103,7 +93,7 @@ if not df.empty:
         #size_max=size,
         #zoom=5,
         #height=700,
-        #hover_data=hover_data,
+        hover_data=hover_data,
         #hover_name="Kosten"
         )
 
