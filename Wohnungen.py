@@ -90,7 +90,7 @@ if not df.empty:
         #color="Kosten",
         #color_continuous_scale= [[0, color_custom], [1, 'white']], #[[0, '#00441b'], [0.5, '#72c375'], [1, 'white']],
         #color_continuous_scale= [[0, '#00441b'], [0.5, '#72c375'], [1, 'white']],
-        size="Flaeche",
+        #size="Flaeche",
         #size_max=size,
         #zoom=5,
         #height=700,
