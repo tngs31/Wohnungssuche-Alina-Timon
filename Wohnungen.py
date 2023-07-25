@@ -70,11 +70,11 @@ with st.sidebar:
 hover_data = {'Link': False,
             'Bezugsdatum': True, 
             'Bezirk': True, 
-            'Flaeche': True,
             'Lat': False,
             'Lon': False,
+            'Flaeche': True,
             'Zimmer': False,
-            'Kosten': True,
+            'Kosten': True
             }
 
 
@@ -93,7 +93,7 @@ if not df.empty:
         #size_max=size,
         #zoom=5,
         #height=700,
-        hover_data=hover_data,
+        #hover_data=hover_data,
         hover_name="Kosten"
         )
 
