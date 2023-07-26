@@ -170,7 +170,7 @@ with st.sidebar:
 )
     
     map_style = "carto-positron"
-    map_style=st.selectbox("Hintergrund", {"carto-positron", "open-street-map", "carto-darkmatter"})
+    #map_style=st.selectbox("Hintergrund", {"carto-positron", "open-street-map", "carto-darkmatter"})
 
     
 
@@ -179,7 +179,7 @@ with st.sidebar:
 
 with st.container():
     st.title("Wohnungssuche in Wien")
-    st.write('Auf der Karte finden sich alle potenziellen Wohungen und deren Lage. Falls du nichts siehst, ändere den Background Kartenstil in der Sidebar ganz unten zu carto-darkmatte. Die Bezirke lassen sich filtern. Die Farben zeigen die Preisgruppe und die Größe der Punkte die gesamtfläche.')
+    st.write('Auf der Karte finden sich alle potenziellen Wohungen und deren Lage. Du kannst die Sidebar oben auf dem Pfeil öffnen um Filter zu setzen. Die Bezirke lassen sich filtern. Die Farben zeigen die Preisgruppe und die Größe der Punkte die gesamtfläche.')
     
     #hover data sind die die angezeigt werden beim darüber fahren mit der maus
     hover_data = {'Nummer': False,
