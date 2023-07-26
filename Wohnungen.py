@@ -146,10 +146,8 @@ with st.sidebar:
     
     st.title("Data Adjustments")
     
-    industry_type = st.selectbox(
-    "Bezirk",
-    np.insert(df.Bezirk.unique(), 0, "All",)
-    )
+    bezirke = np.insert(df.Bezirk.unique(), 0, "All")
+    industry_type = st.selectbox("Bezirk", bezirke)
     
     
     CH4_min, CH4_max = st.slider(
