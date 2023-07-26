@@ -11,7 +11,8 @@ import numpy as np
 import plotly.express as px
 import requests
 from bs4 import BeautifulSoup
-import re
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 
 
 
@@ -69,28 +70,23 @@ for index, value in df['Bezugsdatum'].items():
 #     image_urls = [img.get("src") for img in image_tags]
 #     return image_urls
 
-def extract_image_url_from_website(url):
-    response = requests.get(url)
-    soup = BeautifulSoup(response.text, "html.parser")
+def extract_image_urls_from_website(url):
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")  # Führt den Browser im Headless-Modus aus, um keine sichtbaren Fenster zu öffnen
+    driver = webdriver.Chrome(options=chrome_options)
+    driver.get(url)
 
-    # Versuche, die URL des Hauptbildes aus dem HTML-Code zu extrahieren
-    meta_tags = soup.find_all("meta", property="og:image")
-    if meta_tags:
-        image_url = meta_tags[0].get("content")
-        return image_url
+    # Hier kannst du den Zugriff auf die Website simulieren, um JavaScript zu laden und Bilder anzuzeigen.
+    # Warte hier ggf. eine kurze Zeit, bis die Seite vollständig geladen ist.
 
-    # Wenn keine <meta property="og:image"> Tags gefunden wurden,
-    # versuche andere Muster in den URL-Tags zu suchen
-    url_pattern = re.compile(r'https?://\S+.(?:jpg|jpeg|png|gif)')
-    for tag in soup.find_all("a"):
-        if tag.has_attr("href"):
-            match = url_pattern.search(tag["href"])
-            if match:
-                image_url = match.group()
-                return image_url
+    # Hole den HTML-Code der Seite nach dem Laden mit JavaScript
+    html = driver.page_source
+    driver.quit()
 
-    # Wenn keine URL im HTML-Code gefunden wurde, gib None zurück
-    return None
+    soup = BeautifulSoup(html, "html.parser")
+    image_tags = soup.find_all("img")
+    image_urls = [img.get("src") for img in image_tags]
+    return image_urls
 
 
 
@@ -105,7 +101,7 @@ def display_images_from_urls(df):
         st.markdown(f"[{nummer}]({Link})")
         
         try:
-            image_urls = extract_image_url_from_website(Link)
+            image_urls = extract_image_urls_from_website(Link)
         
             for url in image_urls:
                 st.image(url)
