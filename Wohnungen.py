@@ -177,7 +177,7 @@ with st.container():
     st.write('Auf der Karte finden sich alle potenziellen Wohungen und deren Lage. Falls du nichts siehst, ändere den Background Kartenstil in der Sidebar ganz unten zu carto-darkmatte. Die Bezirke lassen sich filtern. Die Farben zeigen die Preisgruppe und die Größe der Punkte die gesamtfläche.')
     
     #hover data sind die die angezeigt werden beim darüber fahren mit der maus
-    hover_data = {'Nummer': False
+    hover_data = {'Nummer': False,
                   'Bezugsdatum': False,
                   'Bezirk' : False,
                   'lat': False,
