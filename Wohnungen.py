@@ -121,13 +121,13 @@ df['Group'] = np.select(conditions2, choices2)
 
 #Einteilung in Gruppen nach Kosten
 conditions3 = [
-    df['Kosten'] < 800,
-    (df['Kosten'] >= 800) & (df['Kosten'] < 1100),
+    df['Kosten'] < 100,
+    (df['Kosten'] >= 100) & (df['Kosten'] < 1100),
     (df['Kosten'] >= 1100) & (df['Kosten'] < 1300),
     df['Kosten'] >= 1300
 ]
 choices3 = [1, 2, 3, 4]
-choices4 = ['rgb(0,128,0)','rgb(144,238,144) ','rgb(255,165,0)', 'rgb(255,0,0)']
+choices4 = ['rgb(0,128,0)','rgb(144,238,144) ','rgb(255,165,0)', 'rgb(255,255,255)']
 df['Group_Points'] = np.select(conditions3, choices3)
 df['Colour'] = np.select(conditions3, choices4)
 
