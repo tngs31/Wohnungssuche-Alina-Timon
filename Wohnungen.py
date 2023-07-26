@@ -81,7 +81,8 @@ def display_images_from_urls(df):
         image_urls = extract_image_urls_from_website(image_url)
         
         for img_url in image_urls:
-            st.image(img_url)
+            st.write(img_url)
+            #st.image(img_url)
         
 
 
