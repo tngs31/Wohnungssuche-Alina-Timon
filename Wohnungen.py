@@ -169,7 +169,8 @@ with st.sidebar:
     "Größe der Punkte", 0.5, 3.0, (2.0), step=0.5, help="Hier kannst du verstellen wie groß die Punkte dargestellt werden sollen."
 )
     
-    map_style=st.selectbox("Background Mapstyle", {"carto-positron", "open-street-map", "carto-darkmatter"})
+    map_style = "carto-positron"
+    map_style=st.selectbox("Hintergrund", {"carto-positron", "open-street-map", "carto-darkmatter"})
 
     
 
