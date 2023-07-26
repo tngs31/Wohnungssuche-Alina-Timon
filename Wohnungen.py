@@ -163,7 +163,7 @@ def extract_lat_lon_from_shape(wkt_coordinates):
     return lat, lon
 
 data = []
-columns = ["Nummer", "Bezugsdatum", "Bezirk", "lat", "lon", "Flaeche", "Zimmer", "Kosten", "Bild", "Link", "Group_ponts", "Colour", "Group", "size"]
+columns = ["Nummer", "Bezugsdatum", "Bezirk", "lat", "lon", "Flaeche", "Zimmer", "Kosten", "Bild", "Link", "Group_points", "Colour", "Group", "size"]
 df3 = pd.DataFrame(data, columns=columns)
 # Extrahiere lat und lon aus der SHAPE-Spalte und speichere sie in den entsprechenden Spalten
 df3[['lat', 'lon']] = df2['SHAPE'].apply(lambda x: pd.Series(extract_lat_lon_from_shape(x)))
@@ -171,8 +171,9 @@ df3['Nummer'] = df2['HTXT']
 df3['Bezugsdatum'] = df2['LINFO']
 df3['size'] = 0.5   
 df3['Colour'] = "rgb(255,255,255)"
-
-
+df3['Group_points'] = 0   
+df3['Group'] = 0  
+ 
 combined_df = pd.concat([df3, df2], ignore_index=True) 
     
     
@@ -281,7 +282,7 @@ with col1:
             }
     
     
-    df_mima = combined_df.query("`Group` >= @CH4_min and `Group` <= @CH4_max")
+    df_mima = df.query("`Group` >= @CH4_min and `Group` <= @CH4_max")
     
     if industry_type == "All":
         load_map(df_mima, size, map_style)
