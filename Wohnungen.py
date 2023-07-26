@@ -59,43 +59,36 @@ for index, value in df['Bezugsdatum'].items():
     if value != 'sofort':
         df.at[index, 'Bezugsdatum'] = pd.to_datetime(value, format='%d.%m.%Y').strftime('%d.%m.')
 
-# def extract_image_urls_from_website(url):
-#     response = requests.get(url)
-#     soup = BeautifulSoup(response.text, "html.parser")
-#     image_tags = soup.find_all("img")
-#     image_urls = [img.get("src") for img in image_tags]
-#     return image_urls
 
 
-# #Darstellung der Bilder
-# def display_images_from_urls(df):
+def extract_image_urls_from_website(url):
+    response = requests.get(url)
+    soup = BeautifulSoup(response.text, "html.parser")
+    image_tags = soup.find_all("img")
+    image_urls = [img.get("src") for img in image_tags]
+    return image_urls
+
+
+#Darstellung der Bilder
+def display_images_from_urls(df):
     
-#     for index, row in df.iterrows():
-        
-#         nummer = row['Nummer']
-#         Link = row['Link']
-        
-#         st.markdown(f"[{nummer}]({Link})")
-        
-#         image_urls = extract_image_urls_from_website(Link)
-        
-#         for url in image_urls:
-#             try:
-#                 st.image(url)
-                
-#             except Exception as e:
-#                 st.warning(f"Fehler beim Laden des Bildes")
-
-        
-def display_websites_from_urls(df):
     for index, row in df.iterrows():
+        
         nummer = row['Nummer']
         Link = row['Link']
         
         st.markdown(f"[{nummer}]({Link})")
         
-        st.write(f"Website {nummer}:")
-        st.iframe(Link, width=700, height=500)
+        try:
+            image_urls = extract_image_urls_from_website(Link)
+        
+            for url in image_urls:
+                st.image(url)
+                
+        except Exception as e:
+            st.warning(f"Fehler beim Laden der Bilder dieses Wohnobjekts")
+
+        
         
 
 
