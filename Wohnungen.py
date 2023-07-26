@@ -47,11 +47,11 @@ def get_lat_long_for_district(district):
 
 
 for index, row in df.iterrows():
-        if pd.isnull(row['Lat']):
+        if pd.isnull(row['lat']):
             district = row['Bezirk']
             latitude, longitude = get_lat_long_for_district(district)
-            df.at[index, 'Lat'] = latitude
-            df.at[index, 'Lon'] = longitude
+            df.at[index, 'lat'] = latitude
+            df.at[index, 'lon'] = longitude
 
 
 
@@ -86,26 +86,14 @@ df['Colour'] = np.select(conditions3, choices4)
 
 
 def set_size_based_on_capacity(input_df, size):
-    """
-    Fügt eine neue Spalte "size" im DataFrame ein, basierend auf den Werten in der Spalte "".
-
-    Parameter:
-        input_df (pandas.DataFrame): Der DataFrame, dem die Spalte "size" hinzugefügt werden soll.
-
-    Rückgabe:
-        None (Die Funktion ändert den DataFrame direkt.)
-    """
     #Zuordnung der size
     conditions = [
         input_df['Group'] < 2,
         input_df['Group'] == 2,
         input_df['Group'] > 2
     ]
-
     choices = [(size), (size*3), (size*6)]
-
     input_df['size'] = np.select(conditions, choices)
-    
     return input_df
     
     
@@ -148,7 +136,7 @@ def load_map(input_df, size, map_style):
 ### STREAMLIT
 
 #--- SETUP WEBSITE CONFIG ---
-st.set_page_config(page_title="Methanation potential Germany", page_icon=":factory:", layout="wide", initial_sidebar_state = "collapsed" )
+st.set_page_config(page_title="Wohnungssuche Alina und Timon in Wien", page_icon=":derelict_house:", layout="wide", initial_sidebar_state = "collapsed" )
 
     
 
