@@ -180,7 +180,7 @@ st.set_page_config(page_title="Wohnungssuche Alina und Timon in Wien", page_icon
 #--- MAP FILTER ---
 with st.sidebar:
     st.title('Die Wohnungen:')
-    display_websites_from_urls(df)
+    display_images_from_urls(df)
     
   
     
