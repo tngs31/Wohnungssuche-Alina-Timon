@@ -146,7 +146,11 @@ with st.sidebar:
     
     st.title("Data Adjustments")
     
-    bezirke = np.insert(df.Bezirk.unique(), 0, "All")
+    # Erstelle eine Liste aller eindeutigen Bezirke
+    bezirke = df.Bezirk.unique().tolist()
+    # Füge die Option "All" am Anfang der Liste hinzu
+    bezirke.insert(0, "All")
+    
     industry_type = st.selectbox("Bezirk", bezirke)
     
     
@@ -197,8 +201,6 @@ with st.container():
     
     if industry_type == "All":
         load_map(df_mima, size, map_style)
-    
-    
-    else: #filtern mit der query methode
+    else:
         df1 = df_mima.query("Bezirk == @industry_type")
         load_map(df1, size, map_style)
