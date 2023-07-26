@@ -169,7 +169,7 @@ st.set_page_config(page_title="Wohnungssuche Alina und Timon in Wien", page_icon
 
 #--- MAP FILTER ---
 with st.sidebar:
-    st.write('Die Wohnungen:')
+    st.title('Die Wohnungen:')
     display_images_from_urls(df)
     
   
@@ -185,7 +185,7 @@ col1, col2 = st.columns([7,1])
 
 with col2:
   
-    st.title("Wohnungsfilter")
+    st.write("Wohnungsfilter")
     
     # Erstelle eine Liste aller eindeutigen Bezirke
     bezirke = df.Bezirk.unique().tolist()
@@ -200,7 +200,7 @@ with col2:
    )
 
     
-    st.title("Kartenanpassungen")
+    st.write("Kartenanpassungen")
     
     size = st.slider(
     "Größe der Punkte", 0.5, 3.0, (2.0), step=0.5, help="Hier kannst du verstellen wie groß die Punkte dargestellt werden sollen."
