@@ -136,7 +136,7 @@ def load_map(input_df, size, map_style):
 ### STREAMLIT
 
 #--- SETUP WEBSITE CONFIG ---
-st.set_page_config(page_title="Wohnungssuche Alina und Timon in Wien", page_icon=":derelict_house:", layout="wide", initial_sidebar_state = "collapsed" )
+st.set_page_config(page_title="Wohnungssuche Alina und Timon in Wien", page_icon=":derelict_house:", layout="wide")# , initial_sidebar_state = "collapsed" )
 
     
 
@@ -184,6 +184,9 @@ with st.sidebar:
 #--- MAP SECTION ---"Bezugsdatum", "Bezirk", "lat", "lon", "Flaeche", "Zimmer", "Kosten"
 
 with st.container():
+    st.title("Alinas und Timons Wohnungssuche in Wien")
+    st.write('Auf der Karte finden sich alle potenziellen Wohungen und deren Lage. Falls du nichts siehst, ändere den Background Kartenstil in der Sidebar ganz unten zu carto-darkmatte. Die Bezirke lassen sich filtern. Die Farben zeigen die Preisgruppe und die Größe der Punkte die gesamtfläche. ')
+    
     #hover data sind die die angezeigt werden beim darüber fahren mit der maus
     hover_data = {'Bezugsdatum': False,
                   'Bezirk' : True,
