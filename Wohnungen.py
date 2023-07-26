@@ -168,7 +168,22 @@ st.set_page_config(page_title="Wohnungssuche Alina und Timon in Wien", page_icon
 
 #--- MAP FILTER ---
 with st.sidebar:
+    st.write('Die Wohnungen:')
+    display_images_from_urls(df)
     
+  
+    
+#--- MAP SECTION ---"Bezugsdatum", "Bezirk", "lat", "lon", "Flaeche", "Zimmer", "Kosten"
+
+
+
+st.title("Wohnungssuche in Wien")
+st.write('Auf der Karte finden sich alle potenziellen Wohungen und deren Lage. Du kannst die Sidebar oben auf dem Pfeil öffnen um Filter zu setzen. Die Bezirke lassen sich filtern. Die Farben zeigen die Preisgruppe und die Größe der Punkte die gesamtfläche.')
+
+col1, col2 = st.columns([5,2])
+
+with col2:
+  
     st.title("Wohnungsfilter")
     
     # Erstelle eine Liste aller eindeutigen Bezirke
@@ -195,16 +210,6 @@ with st.sidebar:
 
     
 
-    
-#--- MAP SECTION ---"Bezugsdatum", "Bezirk", "lat", "lon", "Flaeche", "Zimmer", "Kosten"
-
-
-
-st.title("Wohnungssuche in Wien")
-st.write('Auf der Karte finden sich alle potenziellen Wohungen und deren Lage. Du kannst die Sidebar oben auf dem Pfeil öffnen um Filter zu setzen. Die Bezirke lassen sich filtern. Die Farben zeigen die Preisgruppe und die Größe der Punkte die gesamtfläche.')
-
-col1, col2 = st.columns([5,2])
-
 with col1:
     
     #hover data sind die die angezeigt werden beim darüber fahren mit der maus
@@ -230,8 +235,5 @@ with col1:
         load_map(df1, size, map_style)
         
         
-with col2:
-    st.write('Die Wohnungen:')
-    display_images_from_urls(df)
-    
+
     
