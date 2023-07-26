@@ -9,9 +9,12 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import plotly.express as px
-import requests
-from bs4 import BeautifulSoup
-import re
+# import requests
+# from bs4 import BeautifulSoup
+# import re
+# requests==2.31.0
+# beautifulsoup4==4.12.2
+# selenium==4.10.0
 
 
 
@@ -70,18 +73,18 @@ for index, value in df['Bezugsdatum'].items():
 #     image_urls = [img.get("src") for img in image_tags]
 #     return image_urls
 
-def extract_image_urls_from_website(url):
-    response = requests.get(url)
-    response.raise_for_status()
+# def extract_image_urls_from_website(url):
+#     response = requests.get(url)
+#     response.raise_for_status()
 
-    # Suche nach Bild-URLs im HTML-Code mit Hilfe von regulären Ausdrücken
-    image_urls = re.findall(r'<img .*?src="(.*?)"', response.text)
+#     # Suche nach Bild-URLs im HTML-Code mit Hilfe von regulären Ausdrücken
+#     image_urls = re.findall(r'<img .*?src="(.*?)"', response.text)
 
-    # Füge das Schema (http oder https) zu den Bild-URLs hinzu, falls es fehlt
-    base_url = response.url
-    image_urls = [url if url.startswith(("http://", "https://")) else f"{base_url}{url}" for url in image_urls]
+#     # Füge das Schema (http oder https) zu den Bild-URLs hinzu, falls es fehlt
+#     base_url = response.url
+#     image_urls = [url if url.startswith(("http://", "https://")) else f"{base_url}{url}" for url in image_urls]
 
-    return image_urls
+    # return image_urls
 
 
 #Darstellung der Bilder
@@ -91,17 +94,13 @@ def display_images_from_urls(df):
         
         nummer = row['Nummer']
         Link = row['Link']
+        Bild = row['Bild']
         
         st.markdown(f"[{nummer}]({Link})")
         
-        try:
-            image_urls = extract_image_urls_from_website(Link)
-        
-            for url in image_urls:
-                st.image(url)
-                
-        except Exception as e:
-            st.warning(f"Fehler beim Laden der Bilder dieses Wohnobjekts")
+
+        st.image(Bild)
+
 
         
         
