@@ -11,11 +11,7 @@ import numpy as np
 import plotly.express as px
 import requests
 from bs4 import BeautifulSoup
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.by import By
+import re
 
 
 
@@ -75,23 +71,17 @@ for index, value in df['Bezugsdatum'].items():
 #     return image_urls
 
 def extract_image_urls_from_website(url):
-    chrome_options = Options()
-    chrome_options.add_argument("--headless")
-    driver = webdriver.Chrome(options=chrome_options)
-    driver.get(url)
+    response = requests.get(url)
+    response.raise_for_status()
 
-    # Warte auf das vollständige Laden der Seite mit JavaScript
-    WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.TAG_NAME, "img")))
+    # Suche nach Bild-URLs im HTML-Code mit Hilfe von regulären Ausdrücken
+    image_urls = re.findall(r'<img .*?src="(.*?)"', response.text)
 
-    # Hole den HTML-Code der Seite nach dem Laden mit JavaScript
-    html = driver.page_source
-    driver.quit()
+    # Füge das Schema (http oder https) zu den Bild-URLs hinzu, falls es fehlt
+    base_url = response.url
+    image_urls = [url if url.startswith(("http://", "https://")) else f"{base_url}{url}" for url in image_urls]
 
-    soup = BeautifulSoup(html, "html.parser")
-    image_tags = soup.find_all("img")
-    image_urls = [img.get("src") for img in image_tags]
     return image_urls
-
 
 
 #Darstellung der Bilder
