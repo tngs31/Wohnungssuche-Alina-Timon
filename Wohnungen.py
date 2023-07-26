@@ -59,12 +59,12 @@ for index, value in df['Bezugsdatum'].items():
     if value != 'sofort':
         df.at[index, 'Bezugsdatum'] = pd.to_datetime(value, format='%d.%m.%Y').strftime('%d.%m.')
 
-def extract_image_urls_from_website(url):
-    response = requests.get(url)
-    soup = BeautifulSoup(response.text, "html.parser")
-    image_tags = soup.find_all("img")
-    image_urls = [img.get("src") for img in image_tags]
-    return image_urls
+# def extract_image_urls_from_website(url):
+#     response = requests.get(url)
+#     soup = BeautifulSoup(response.text, "html.parser")
+#     image_tags = soup.find_all("img")
+#     image_urls = [img.get("src") for img in image_tags]
+#     return image_urls
 
 
 # #Darstellung der Bilder
@@ -87,32 +87,15 @@ def extract_image_urls_from_website(url):
 #                 st.warning(f"Fehler beim Laden des Bildes")
 
         
-def is_image_url(url):
-    try:
-        response = requests.head(url)
-        return response.headers["Content-Type"].startswith("image")
-    except:
-        return False
-
-def display_images_from_urls(df):
+def display_websites_from_urls(df):
     for index, row in df.iterrows():
         nummer = row['Nummer']
         Link = row['Link']
         
         st.markdown(f"[{nummer}]({Link})")
         
-        image_urls = extract_image_urls_from_website(Link)
-        
-        for url in image_urls:
-            if is_image_url(url):
-                try:
-                    st.image(url)
-                except Exception as e:
-                    st.warning(f"Fehler beim Laden des Bildes von {url}: {str(e)}")
-            else:
-                st.warning(f"{url} ist keine gültige Bild-URL.")       
-
-
+        st.write(f"Website {nummer}:")
+        st.iframe(Link, width=700, height=500)
         
 
 
@@ -204,7 +187,7 @@ st.set_page_config(page_title="Wohnungssuche Alina und Timon in Wien", page_icon
 #--- MAP FILTER ---
 with st.sidebar:
     st.title('Die Wohnungen:')
-    display_images_from_urls(df)
+    display_websites_from_urls(df)
     
   
     
