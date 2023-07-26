@@ -53,6 +53,10 @@ for index, row in df.iterrows():
             df.at[index, 'lat'] = latitude
             df.at[index, 'lon'] = longitude
 
+# Die Schleife zum Umformatieren der Spalte 'Datum'
+for index, value in df['Bezugsdatum'].items():
+    if value != 'sofort':
+        df.at[index, 'Bezugsdatum'] = pd.to_datetime(value, format='%d.%m.%Y').strftime('%d.%m.')
 
 
 
