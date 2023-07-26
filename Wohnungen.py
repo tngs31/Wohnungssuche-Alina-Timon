@@ -15,8 +15,8 @@ import plotly.express as px
 
 #--- PROCESS DATA AREA ---
 file_path = "230725-Wohnungssuche-Wien.xlsx"
-df = pd.read_excel(file_path, usecols=["Nummer","Bezugsdatum", "Bezirk", "Lat", "Lon", "Flaeche", "Zimmer", "Kosten"])
-df.columns = ["Nummer", "Bezugsdatum", "Bezirk", "lat", "lon", "Flaeche", "Zimmer", "Kosten"]
+df = pd.read_excel(file_path, usecols=["Nummer","Bezugsdatum", "Bezirk", "Lat", "Lon", "Flaeche", "Zimmer", "Kosten", "Bild"])
+df.columns = ["Nummer", "Bezugsdatum", "Bezirk", "lat", "lon", "Flaeche", "Zimmer", "Kosten", "Bild"]
 
 
 #Hinzufügen der latlon
@@ -58,6 +58,17 @@ for index, value in df['Bezugsdatum'].items():
     if value != 'sofort':
         df.at[index, 'Bezugsdatum'] = pd.to_datetime(value, format='%d.%m.%Y').strftime('%d.%m.')
 
+
+
+
+#Darstellung der Bilder
+def display_images_from_urls(df):
+    for index, row in df.iterrows():
+        image_url = row['Bild']
+        nummer = row['Nummer']
+        
+        st.image(image_url)
+        st.write(nummer)
 
 
 #Einteilung in Gruppen nach Flaeche
@@ -177,13 +188,14 @@ with st.sidebar:
     
 #--- MAP SECTION ---"Bezugsdatum", "Bezirk", "lat", "lon", "Flaeche", "Zimmer", "Kosten"
 
+
+
+st.title("Wohnungssuche in Wien")
+st.write('Auf der Karte finden sich alle potenziellen Wohungen und deren Lage. Du kannst die Sidebar oben auf dem Pfeil öffnen um Filter zu setzen. Die Bezirke lassen sich filtern. Die Farben zeigen die Preisgruppe und die Größe der Punkte die gesamtfläche.')
+
 col1, col2 = st.columns([5,2])
 
-
-
 with col1:
-    st.title("Wohnungssuche in Wien")
-    st.write('Auf der Karte finden sich alle potenziellen Wohungen und deren Lage. Du kannst die Sidebar oben auf dem Pfeil öffnen um Filter zu setzen. Die Bezirke lassen sich filtern. Die Farben zeigen die Preisgruppe und die Größe der Punkte die gesamtfläche.')
     
     #hover data sind die die angezeigt werden beim darüber fahren mit der maus
     hover_data = {'Nummer': False,
@@ -210,4 +222,6 @@ with col1:
         
 with col2:
     st.write('Die Wohnungen:')
+    display_images_from_urls(df)
+    
     
