@@ -119,7 +119,7 @@ def load_map(input_df, size, map_style):
                 "rgb(0,128,0)": "rgb(0,128,0)" },     # Grün
             size="size",
             size_max=size*6,
-            zoom=12,
+            zoom=10,
             height=1000,
             hover_data=hover_data,
             hover_name="Bezugsdatum",
@@ -144,7 +144,7 @@ st.set_page_config(page_title="Wohnungssuche Alina und Timon in Wien", page_icon
 #--- MAP FILTER ---
 with st.sidebar:
     
-    st.title("Data Adjustments")
+    st.title("Wohnungsfilter")
     
     # Erstelle eine Liste aller eindeutigen Bezirke
     bezirke = df.Bezirk.unique().tolist()
@@ -155,27 +155,16 @@ with st.sidebar:
     
     
     CH4_min, CH4_max = st.slider(
-       "Range of  in Groups", 0, 3, (1, 3), step=1, help=""
+       "Wohnungsgröße", 0, 3, (1, 3), step=1, help="0: unter 50 qm < 1: bis 70 qm < 2: bis 90 qm < 3: über 90 qm"
    )
 
-
-    st.title("Evaluation Adjustments")
-    st.write("Filter the displayed locations by the score. This can be done either in groups or individually with the slider.")
-
-
-
-
-
-
-
     
-    st.title("Map Adjustments")
+    st.title("Kartenanpassungen")
     
     size = st.slider(
     "Size of the dots", 0.5, 3.0, (1.0), step=0.5, help="Pick a size"
 )
     
-
     map_style=st.selectbox("Background Mapstyle", {"carto-positron", "stamen-terrain", "carto-darkmatter", "open-street-map"})
 
     
@@ -184,14 +173,14 @@ with st.sidebar:
 #--- MAP SECTION ---"Bezugsdatum", "Bezirk", "lat", "lon", "Flaeche", "Zimmer", "Kosten"
 
 with st.container():
-    st.title("Alinas und Timons Wohnungssuche in Wien")
+    st.title("Wohnungssuche in Wien")
     st.write('Auf der Karte finden sich alle potenziellen Wohungen und deren Lage. Falls du nichts siehst, ändere den Background Kartenstil in der Sidebar ganz unten zu carto-darkmatte. Die Bezirke lassen sich filtern. Die Farben zeigen die Preisgruppe und die Größe der Punkte die gesamtfläche. ')
     
     #hover data sind die die angezeigt werden beim darüber fahren mit der maus
     hover_data = {'Bezugsdatum': False,
-                  'Bezirk' : True,
-                  'lat': True,
-                  'lon': True,
+                  'Bezirk' : False,
+                  'lat': False,
+                  'lon': False,
                   'Flaeche': True,
                   'Zimmer': True,
                   'Kosten': True,
