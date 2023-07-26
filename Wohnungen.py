@@ -77,8 +77,15 @@ def display_images_from_urls(df):
         
         st.markdown(f"[{nummer}]({Link})")
         
-        image_url = row['Link']
-        image_urls = extract_image_urls_from_website(image_url)
+        image_urls = extract_image_urls_from_website(Link)
+        
+        for url in image_urls:
+            try:
+                st.image(url)
+                
+            except Exception as e:
+                st.warning(f"Fehler beim Laden des Bildes")
+
         
         
 
