@@ -24,6 +24,20 @@ file_path = "230725-Wohnungssuche-Wien.xlsx"
 df = pd.read_excel(file_path, usecols=["Nummer","Bezugsdatum", "Bezirk", "Lat", "Lon", "Flaeche", "Zimmer", "Kosten", "Bild", "Link"])
 df.columns = ["Nummer", "Bezugsdatum", "Bezirk", "lat", "lon", "Flaeche", "Zimmer", "Kosten", "Bild", "Link"]
 
+file_path2 = "UBAHNHALT.xlsx"
+df2 = pd.read_excel(file_path2, usecols=["SHAPE","LINFO", "HTXT"])
+df2.columns = ["SHAPE","LINFO", "HTXT"]
+
+# Funktion zur Extraktion von lat und lon aus der SHAPE-Spalte
+def extract_lat_lon_from_shape(wkt_coordinates):
+    coordinates_str = wkt_coordinates.replace("POINT (", "").replace(")", "")
+    lon, lat = map(float, coordinates_str.split())
+    return lat, lon
+
+# Extrahiere lat und lon aus der SHAPE-Spalte und speichere sie in den entsprechenden Spalten
+df2[['lat', 'lon']] = df2['SHAPE'].apply(lambda x: pd.Series(extract_lat_lon_from_shape(x)))
+
+
 
 #Hinzufügen der latlon
 def get_lat_long_for_district(district):
