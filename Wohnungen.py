@@ -162,10 +162,10 @@ with st.sidebar:
     st.title("Kartenanpassungen")
     
     size = st.slider(
-    "Size of the dots", 0.5, 3.0, (1.0), step=0.5, help="Pick a size"
+    "Größe der Punkte", 0.5, 3.0, (1.0), step=0.5, help="Hier kannst du verstellen wie groß die Punkte dargestellt werden sollen."
 )
     
-    map_style=st.selectbox("Background Mapstyle", {"carto-positron", "stamen-terrain", "carto-darkmatter", "open-street-map"})
+    map_style=st.selectbox("Background Mapstyle", {"carto-positron", "carto-darkmatter", "open-street-map"})
 
     
 
@@ -174,7 +174,7 @@ with st.sidebar:
 
 with st.container():
     st.title("Wohnungssuche in Wien")
-    st.write('Auf der Karte finden sich alle potenziellen Wohungen und deren Lage. Falls du nichts siehst, ändere den Background Kartenstil in der Sidebar ganz unten zu carto-darkmatte. Die Bezirke lassen sich filtern. Die Farben zeigen die Preisgruppe und die Größe der Punkte die gesamtfläche. ')
+    st.write('Auf der Karte finden sich alle potenziellen Wohungen und deren Lage. Falls du nichts siehst, ändere den Background Kartenstil in der Sidebar ganz unten zu carto-darkmatte. Die Bezirke lassen sich filtern. Die Farben zeigen die Preisgruppe und die Größe der Punkte die gesamtfläche.')
     
     #hover data sind die die angezeigt werden beim darüber fahren mit der maus
     hover_data = {'Bezugsdatum': False,
