@@ -146,36 +146,6 @@ def set_size_based_on_capacity(input_df, size):
     input_df['size'] = np.select(conditions, choices)
     return input_df
     
- 
-
-
-  
-# --- INCLUDE SECOND DATA ---
-
-file_path2 = "UBAHNHALT.xlsx"
-df2 = pd.read_excel(file_path2, usecols=["SHAPE","LINFO", "HTXT"])
-df2.columns = ["SHAPE","LINFO", "HTXT"]
-
-# Funktion zur Extraktion von lat und lon aus der SHAPE-Spalte
-def extract_lat_lon_from_shape(wkt_coordinates):
-    coordinates_str = wkt_coordinates.replace("POINT (", "").replace(")", "")
-    lon, lat = map(float, coordinates_str.split())
-    return lat, lon
-
-data = []
-columns = ["Nummer", "Bezugsdatum", "Bezirk", "lat", "lon", "Flaeche", "Zimmer", "Kosten", "Bild", "Link", "Group_points", "Colour", "Group", "size"]
-df3 = pd.DataFrame(data, columns=columns)
-# Extrahiere lat und lon aus der SHAPE-Spalte und speichere sie in den entsprechenden Spalten
-df3[['lat', 'lon']] = df2['SHAPE'].apply(lambda x: pd.Series(extract_lat_lon_from_shape(x)))
-df3['Nummer'] = df2['HTXT']
-df3['Bezugsdatum'] = df2['LINFO']
-df3['size'] = 0.5   
-df3['Colour'] = "rgb(255,255,255)"
-df3['Group_points'] = 0   
-df3['Group'] = 0  
- 
-combined_df = pd.concat([df3, df2], ignore_index=True) 
-    
     
     
     
