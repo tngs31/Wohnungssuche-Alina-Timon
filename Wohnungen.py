@@ -20,9 +20,13 @@ import plotly.express as px
 
 
 #--- PROCESS DATA AREA ---
-file_path = "230725-Wohnungssuche-Wien.xlsx"
+file_path = "230725-map.xlsx"
 df = pd.read_excel(file_path, usecols=["Nummer","Bezugsdatum", "Bezirk", "Lat", "Lon", "Flaeche", "Zimmer", "Kosten", "Bild", "Link"])
 df.columns = ["Nummer", "Bezugsdatum", "Bezirk", "lat", "lon", "Flaeche", "Zimmer", "Kosten", "Bild", "Link"]
+
+file_path = "230725-Wohnungssuche-Wien.xlsx"
+df2 = pd.read_excel(file_path, usecols=["Nummer","Bezugsdatum", "Bezirk", "Lat", "Lon", "Flaeche", "Zimmer", "Kosten", "Bild", "Link"])
+df2.columns = ["Nummer", "Bezugsdatum", "Bezirk", "lat", "lon", "Flaeche", "Zimmer", "Kosten", "Bild", "Link"]
 
 
 #Hinzufügen der latlon
