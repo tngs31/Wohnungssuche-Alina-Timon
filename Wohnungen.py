@@ -75,8 +75,9 @@ def display_images_from_urls(df):
         Link = row['Link']
         
         #st.write(nummer)
-        st.write(nummer)
-        st.write(Link)
+        #st.write(nummer)
+        #st.write(Link)
+        st.markdown(f"[{nummer}]({Link})")
         st.image(image_url)
         
 
@@ -180,7 +181,7 @@ with st.sidebar:
 st.title("Wohnungssuche in Wien")
 st.write('Auf der Karte finden sich alle potenziellen Wohungen und deren Lage. Du kannst die Sidebar oben auf dem Pfeil öffnen um Filter zu setzen. Die Bezirke lassen sich filtern. Die Farben zeigen die Preisgruppe und die Größe der Punkte die gesamtfläche.')
 
-col1, col2 = st.columns([5,2])
+col1, col2 = st.columns([7,1])
 
 with col2:
   
