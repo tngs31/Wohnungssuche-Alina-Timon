@@ -80,8 +80,6 @@ def display_images_from_urls(df):
         image_url = row['Link']
         image_urls = extract_image_urls_from_website(image_url)
         
-        for x in image_urls:
-            st.image(x)
         
 
 
