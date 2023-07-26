@@ -13,6 +13,10 @@ import requests
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
+
 
 
 
@@ -72,12 +76,12 @@ for index, value in df['Bezugsdatum'].items():
 
 def extract_image_urls_from_website(url):
     chrome_options = Options()
-    chrome_options.add_argument("--headless")  # Führt den Browser im Headless-Modus aus, um keine sichtbaren Fenster zu öffnen
+    chrome_options.add_argument("--headless")
     driver = webdriver.Chrome(options=chrome_options)
     driver.get(url)
 
-    # Hier kannst du den Zugriff auf die Website simulieren, um JavaScript zu laden und Bilder anzuzeigen.
-    # Warte hier ggf. eine kurze Zeit, bis die Seite vollständig geladen ist.
+    # Warte auf das vollständige Laden der Seite mit JavaScript
+    WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.TAG_NAME, "img")))
 
     # Hole den HTML-Code der Seite nach dem Laden mit JavaScript
     html = driver.page_source
