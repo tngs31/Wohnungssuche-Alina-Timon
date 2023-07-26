@@ -148,7 +148,7 @@ with st.sidebar:
     
     industry_type = st.selectbox(
     "Bezirk",
-    np.insert(df.Technology.unique(), 0, "All",)
+    np.insert(df.Bezirk.unique(), 0, "All",)
     )
     
     
@@ -202,5 +202,5 @@ with st.container():
     
     
     else: #filtern mit der query methode
-        df1 = df_mima.query("Technology == @industry_type")
+        df1 = df_mima.query("Bezirk == @industry_type")
         load_map(df1, size, map_style)
