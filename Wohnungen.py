@@ -15,8 +15,8 @@ import plotly.express as px
 
 #--- PROCESS DATA AREA ---
 file_path = "230725-Wohnungssuche-Wien.xlsx"
-df = pd.read_excel(file_path, usecols=["Nummer","Bezugsdatum", "Bezirk", "Lat", "Lon", "Flaeche", "Zimmer", "Kosten", "Bild"])
-df.columns = ["Nummer", "Bezugsdatum", "Bezirk", "lat", "lon", "Flaeche", "Zimmer", "Kosten", "Bild"]
+df = pd.read_excel(file_path, usecols=["Nummer","Bezugsdatum", "Bezirk", "Lat", "Lon", "Flaeche", "Zimmer", "Kosten", "Bild", "Link"])
+df.columns = ["Nummer", "Bezugsdatum", "Bezirk", "lat", "lon", "Flaeche", "Zimmer", "Kosten", "Bild", "Link"]
 
 
 #Hinzufügen der latlon
@@ -66,8 +66,10 @@ def display_images_from_urls(df):
     for index, row in df.iterrows():
         image_url = row['Bild']
         nummer = row['Nummer']
+        Link = row['Link']
         
-        st.write(nummer)
+        #st.write(nummer)
+        st.write(nummer(Link))
         st.image(image_url)
         
 
