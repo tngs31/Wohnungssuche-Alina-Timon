@@ -67,8 +67,9 @@ def display_images_from_urls(df):
         image_url = row['Bild']
         nummer = row['Nummer']
         
-        st.image(image_url)
         st.write(nummer)
+        st.image(image_url)
+        
 
 
 #Einteilung in Gruppen nach Flaeche
