@@ -177,7 +177,11 @@ with st.sidebar:
     
 #--- MAP SECTION ---"Bezugsdatum", "Bezirk", "lat", "lon", "Flaeche", "Zimmer", "Kosten"
 
-with st.container():
+col1, col2 = st.columns([5,2])
+
+
+
+with col1:
     st.title("Wohnungssuche in Wien")
     st.write('Auf der Karte finden sich alle potenziellen Wohungen und deren Lage. Du kannst die Sidebar oben auf dem Pfeil öffnen um Filter zu setzen. Die Bezirke lassen sich filtern. Die Farben zeigen die Preisgruppe und die Größe der Punkte die gesamtfläche.')
     
@@ -202,3 +206,8 @@ with st.container():
     else:
         df1 = df_mima.query("Bezirk == @industry_type")
         load_map(df1, size, map_style)
+        
+        
+with col2:
+    st.write('Die Wohnungen:')
+    
