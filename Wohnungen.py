@@ -112,8 +112,8 @@ def display_images_from_urls(df):
 
 #Einteilung in Gruppen nach Flaeche
 conditions2 = [
-    df['Flaeche'] < 50,
-    (df['Flaeche'] >= 50) & (df['Flaeche'] < 70),
+    df['Flaeche'] < 0,
+    (df['Flaeche'] > 0) & (df['Flaeche'] < 70),
     (df['Flaeche'] >= 70) & (df['Flaeche'] <= 90),
     df['Flaeche'] > 90
 ]
@@ -208,7 +208,7 @@ with st.sidebar:
 
 
 st.title("Wohnungssuche in Wien")
-st.write('Auf der Karte finden sich alle potenziellen Wohungen und deren Lage. Du kannst die Sidebar oben auf dem Pfeil öffnen um die einzelnen Wohnungen zu sehen. Folgende Filter kannst du setzen: Die Bezirke lassen sich filtern. Die Farben zeigen die Preisgruppe (rot: 1300€+/ Orange: bis 1300€/ Türkis: bis 1100€/ Grün: unter 800€) und die Größe der Punkte die gesamtfläche.')
+st.write('Auf der Karte finden sich alle potenziellen Wohungen und deren Lage. Du kannst die Sidebar oben auf dem Pfeil öffnen um die einzelnen Wohnungen zu sehen. Folgende Filter kannst du setzen: Die Bezirke lassen sich filtern. Bezirk 99 sind die Ubahn Stationen. Die Farben zeigen die Preisgruppe (rot: 1300€+/ Orange: bis 1300€/ Türkis: bis 1100€), außerdem in Grün die Ubahn stationen. Diese werden nur angezeigt wenn du den slider "Wohnungsgröße" auf 0 verkleinerst. Die Linie steht im Feld "Zimmer"')
 
 col1, col2 = st.columns([7,1])
 
@@ -225,7 +225,7 @@ with col2:
     
     
     CH4_min, CH4_max = st.slider(
-       "Wohnungsgröße", 0, 3, (1, 3), step=1, help="0: unter 50 qm < 1: bis 70 qm < 2: bis 90 qm < 3: über 90 qm"
+       "Wohnungsgröße", 0, 3, (1, 3), step=1, help="1: bis 70 qm < 2: bis 90 qm < 3: über 90 qm || Null sind die UBAHNEN"
    )
 
     
