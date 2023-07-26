@@ -24,6 +24,9 @@ file_path = "230725-map.xlsx"
 df = pd.read_excel(file_path, usecols=["Nummer","Bezugsdatum", "Bezirk", "Lat", "Lon", "Flaeche", "Zimmer", "Kosten", "Bild", "Link"])
 df.columns = ["Nummer", "Bezugsdatum", "Bezirk", "lat", "lon", "Flaeche", "Zimmer", "Kosten", "Bild", "Link"]
 
+file_path = "230725-Wohnungssuche-Wien.xlsx"
+df2 = pd.read_excel(file_path, usecols=["Nummer","Bezugsdatum", "Bezirk", "Lat", "Lon", "Flaeche", "Zimmer", "Kosten", "Bild", "Link"])
+df2.columns = ["Nummer", "Bezugsdatum", "Bezirk", "lat", "lon", "Flaeche", "Zimmer", "Kosten", "Bild", "Link"]
 
 
 #Hinzufügen der latlon
@@ -196,7 +199,7 @@ st.set_page_config(page_title="Wohnungssuche Alina und Timon in Wien", page_icon
 #--- MAP FILTER ---
 with st.sidebar:
     st.title('Die Wohnungen:')
-    display_images_from_urls(df)
+    display_images_from_urls(df2)
     
   
     
