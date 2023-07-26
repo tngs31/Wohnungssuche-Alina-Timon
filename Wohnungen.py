@@ -119,7 +119,7 @@ def load_map(input_df, size, map_style):
                 "rgb(0,128,0)": "rgb(0,128,0)" },     # Grün
             size="size",
             size_max=size*6,
-            zoom=5,
+            zoom=12,
             height=1000,
             hover_data=hover_data,
             hover_name="Bezugsdatum",
