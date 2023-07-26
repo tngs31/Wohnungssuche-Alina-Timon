@@ -67,11 +67,35 @@ def extract_image_urls_from_website(url):
     return image_urls
 
 
-#Darstellung der Bilder
-def display_images_from_urls(df):
+# #Darstellung der Bilder
+# def display_images_from_urls(df):
     
-    for index, row in df.iterrows():
+#     for index, row in df.iterrows():
         
+#         nummer = row['Nummer']
+#         Link = row['Link']
+        
+#         st.markdown(f"[{nummer}]({Link})")
+        
+#         image_urls = extract_image_urls_from_website(Link)
+        
+#         for url in image_urls:
+#             try:
+#                 st.image(url)
+                
+#             except Exception as e:
+#                 st.warning(f"Fehler beim Laden des Bildes")
+
+        
+def is_image_url(url):
+    try:
+        response = requests.head(url)
+        return response.headers["Content-Type"].startswith("image")
+    except:
+        return False
+
+def display_images_from_urls(df):
+    for index, row in df.iterrows():
         nummer = row['Nummer']
         Link = row['Link']
         
@@ -80,14 +104,13 @@ def display_images_from_urls(df):
         image_urls = extract_image_urls_from_website(Link)
         
         for url in image_urls:
-            try:
-                st.image(url)
-                
-            except Exception as e:
-                st.warning(f"Fehler beim Laden des Bildes")
-
-        
-        
+            if is_image_url(url):
+                try:
+                    st.image(url)
+                except Exception as e:
+                    st.warning(f"Fehler beim Laden des Bildes von {url}: {str(e)}")
+            else:
+                st.warning(f"{url} ist keine gültige Bild-URL.")       
 
 
         
