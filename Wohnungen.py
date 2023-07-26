@@ -11,6 +11,7 @@ import numpy as np
 import plotly.express as px
 import requests
 from bs4 import BeautifulSoup
+import re
 
 
 
@@ -61,12 +62,36 @@ for index, value in df['Bezugsdatum'].items():
 
 
 
-def extract_image_urls_from_website(url):
+# def extract_image_urls_from_website(url):
+#     response = requests.get(url)
+#     soup = BeautifulSoup(response.text, "html.parser")
+#     image_tags = soup.find_all("img")
+#     image_urls = [img.get("src") for img in image_tags]
+#     return image_urls
+
+def extract_image_url_from_website(url):
     response = requests.get(url)
     soup = BeautifulSoup(response.text, "html.parser")
-    image_tags = soup.find_all("img")
-    image_urls = [img.get("src") for img in image_tags]
-    return image_urls
+
+    # Versuche, die URL des Hauptbildes aus dem HTML-Code zu extrahieren
+    meta_tags = soup.find_all("meta", property="og:image")
+    if meta_tags:
+        image_url = meta_tags[0].get("content")
+        return image_url
+
+    # Wenn keine <meta property="og:image"> Tags gefunden wurden,
+    # versuche andere Muster in den URL-Tags zu suchen
+    url_pattern = re.compile(r'https?://\S+.(?:jpg|jpeg|png|gif)')
+    for tag in soup.find_all("a"):
+        if tag.has_attr("href"):
+            match = url_pattern.search(tag["href"])
+            if match:
+                image_url = match.group()
+                return image_url
+
+    # Wenn keine URL im HTML-Code gefunden wurde, gib None zurück
+    return None
+
 
 
 #Darstellung der Bilder
@@ -80,7 +105,7 @@ def display_images_from_urls(df):
         st.markdown(f"[{nummer}]({Link})")
         
         try:
-            image_urls = extract_image_urls_from_website(Link)
+            image_urls = extract_image_url_from_website(Link)
         
             for url in image_urls:
                 st.image(url)
