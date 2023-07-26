@@ -15,8 +15,8 @@ import plotly.express as px
 
 #--- PROCESS DATA AREA ---
 file_path = "230725-Wohnungssuche-Wien.xlsx"
-df = pd.read_excel(file_path, usecols=["Bezugsdatum", "Bezirk", "Lat", "Lon", "Flaeche", "Zimmer", "Kosten"])
-df.columns = ["Bezugsdatum", "Bezirk", "lat", "lon", "Flaeche", "Zimmer", "Kosten"]
+df = pd.read_excel(file_path, usecols=["Nummer","Bezugsdatum", "Bezirk", "Lat", "Lon", "Flaeche", "Zimmer", "Kosten"])
+df.columns = ["Nummer", "Bezugsdatum", "Bezirk", "lat", "lon", "Flaeche", "Zimmer", "Kosten"]
 
 
 #Hinzufügen der latlon
@@ -122,7 +122,7 @@ def load_map(input_df, size, map_style):
             zoom=10,
             height=1000,
             hover_data=hover_data,
-            hover_name="Bezugsdatum",
+            hover_name="Nummer",
         )
     
         st.plotly_chart(fig, use_container_width=True)
@@ -136,7 +136,7 @@ def load_map(input_df, size, map_style):
 ### STREAMLIT
 
 #--- SETUP WEBSITE CONFIG ---
-st.set_page_config(page_title="Wohnungssuche Alina und Timon in Wien", page_icon=":derelict_house:", layout="wide")# , initial_sidebar_state = "collapsed" )
+st.set_page_config(page_title="Wohnungssuche Alina und Timon in Wien", page_icon=":derelict_house:", layout="wide" , initial_sidebar_state = "collapsed" )
 
     
 
@@ -162,10 +162,10 @@ with st.sidebar:
     st.title("Kartenanpassungen")
     
     size = st.slider(
-    "Größe der Punkte", 0.5, 3.0, (1.0), step=0.5, help="Hier kannst du verstellen wie groß die Punkte dargestellt werden sollen."
+    "Größe der Punkte", 0.5, 3.0, (2.0), step=0.5, help="Hier kannst du verstellen wie groß die Punkte dargestellt werden sollen."
 )
     
-    map_style=st.selectbox("Background Mapstyle", {"carto-positron", "carto-darkmatter", "open-street-map"})
+    map_style=st.selectbox("Background Mapstyle", {"carto-positron", "open-street-map", "carto-darkmatter"})
 
     
 
@@ -177,7 +177,8 @@ with st.container():
     st.write('Auf der Karte finden sich alle potenziellen Wohungen und deren Lage. Falls du nichts siehst, ändere den Background Kartenstil in der Sidebar ganz unten zu carto-darkmatte. Die Bezirke lassen sich filtern. Die Farben zeigen die Preisgruppe und die Größe der Punkte die gesamtfläche.')
     
     #hover data sind die die angezeigt werden beim darüber fahren mit der maus
-    hover_data = {'Bezugsdatum': False,
+    hover_data = {'Nummer': False
+                  'Bezugsdatum': False,
                   'Bezirk' : False,
                   'lat': False,
                   'lon': False,
