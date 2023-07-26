@@ -9,7 +9,8 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import plotly.express as px
-
+import requests
+from bs4 import BeautifulSoup
 
 
 
@@ -58,7 +59,12 @@ for index, value in df['Bezugsdatum'].items():
     if value != 'sofort':
         df.at[index, 'Bezugsdatum'] = pd.to_datetime(value, format='%d.%m.%Y').strftime('%d.%m.')
 
-
+def extract_image_urls_from_website(url):
+    response = requests.get(url)
+    soup = BeautifulSoup(response.text, "html.parser")
+    image_tags = soup.find_all("img")
+    image_urls = [img.get("src") for img in image_tags]
+    return image_urls
 
 
 #Darstellung der Bilder
@@ -69,7 +75,8 @@ def display_images_from_urls(df):
         Link = row['Link']
         
         #st.write(nummer)
-        st.write(nummer(Link))
+        st.write(nummer)
+        st.write(Link)
         st.image(image_url)
         
 
