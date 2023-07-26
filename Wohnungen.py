@@ -69,16 +69,22 @@ def extract_image_urls_from_website(url):
 
 #Darstellung der Bilder
 def display_images_from_urls(df):
+    
     for index, row in df.iterrows():
-        image_url = row['Bild']
+        
         nummer = row['Nummer']
         Link = row['Link']
         
-        #st.write(nummer)
-        #st.write(nummer)
-        #st.write(Link)
         st.markdown(f"[{nummer}]({Link})")
-        st.image(image_url)
+        
+        image_url = row['Link']
+        image_urls = extract_image_urls_from_website(image_url)
+        
+        for img_url in image_urls:
+            st.image(img_url)
+        
+
+
         
 
 
@@ -179,7 +185,7 @@ with st.sidebar:
 
 
 st.title("Wohnungssuche in Wien")
-st.write('Auf der Karte finden sich alle potenziellen Wohungen und deren Lage. Du kannst die Sidebar oben auf dem Pfeil öffnen um Filter zu setzen. Die Bezirke lassen sich filtern. Die Farben zeigen die Preisgruppe und die Größe der Punkte die gesamtfläche.')
+st.write('Auf der Karte finden sich alle potenziellen Wohungen und deren Lage. Du kannst die Sidebar oben auf dem Pfeil öffnen um die einzelnen Wohnungen zu sehen. Folgende Filter kannst du setzen: Die Bezirke lassen sich filtern. Die Farben zeigen die Preisgruppe (rot: 1300€+/ Orange: bis 1300€/ Türkis: bis 1100€/ Grün: unter 800€) und die Größe der Punkte die gesamtfläche.')
 
 col1, col2 = st.columns([7,1])
 
