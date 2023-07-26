@@ -182,7 +182,7 @@ with st.container():
     
     #hover data sind die die angezeigt werden beim darüber fahren mit der maus
     hover_data = {'Nummer': False,
-                  'Bezugsdatum': False,
+                  'Bezugsdatum': True,
                   'Bezirk' : False,
                   'lat': False,
                   'lon': False,
